@@ -1,9 +1,0 @@
-items:
-  server_selector:
-    material: DIRT
-    slot: 4
-    display_name: "&eServer Selector"
-    lore:
-      - "&7Right-click to open the server selector!"
-    actions:
-      - "/serverselector"
