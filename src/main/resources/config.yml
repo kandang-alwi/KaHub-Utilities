@@ -1,17 +1,17 @@
 # Style Sederhana
 SPAWN_JOIN: true
-ESSENTIAL_SPAWN_LOCATION: 0,0,0,0
+ESSENTIAL_SPAWN_LOCATION: spawn:185.5311479765986:50.0:682.4735358703502:-89.91147:1.2446605
 PREFIX: "&e&lHUB &d/ "
 PLAYER_JOIN: "&2&l+ &6%player%"
 PLAYER_QUIT: "&4&l- &6%player%"
 
 # Database: MySQL
 mysql:
-  host: pej4bt4
+  host: mysql.kandangalwi.me
   port: 3306
   database: KaHub
-  username: sef0ngdu1t
-  password: n4g4r4
+  username: kandangalwi
+  password: PejabatSep0ngDuitRakyat
 
 # Command Messages
 commands:
@@ -50,4 +50,5 @@ anti_swear:
     - lonte
     - yatim
     - dajjal
+    - allah
 

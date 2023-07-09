@@ -1,0 +1,7 @@
+items:
+  server_selector:
+    material: NETHER_STAR
+    slot: 4
+    display_name: "&eServer Selector"
+    actions:
+      - "/serverselector"

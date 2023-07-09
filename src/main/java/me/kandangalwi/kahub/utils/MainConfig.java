@@ -38,6 +38,7 @@ public class MainConfig {
         loadListenerConfiguration();
         createMenuFiles();
         loadMenuConfigurations(); // Load menu configurations after creating the menu files
+        createDefaultMenuConfigs();
     }
 
     private void loadConfigurations() {
@@ -61,23 +62,6 @@ public class MainConfig {
         if (!menusFolder.exists()) {
             menusFolder.mkdirs();
         }
-
-        for (String menuName : menuConfigs.keySet()) {
-            File menuFile = new File(menusFolder, menuName + ".yml");
-            if (!menuFile.exists()) {
-                try {
-                    menuFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void reload() {
-        loadConfigurations();
-        loadListenerConfiguration();
-        loadMenuConfigurations();
     }
 
     private void loadMenuConfigurations() {
@@ -140,26 +124,34 @@ public class MainConfig {
         }
     }
 
-    public void createDefaultMenuConfig(String menuName, String resourceName) {
-        FileConfiguration menuConfig = getMenuConfig(menuName);
+    public void createDefaultMenuConfigs() {
         File menusFolder = new File(plugin.getDataFolder(), "menus");
-        File menuFile = new File(menusFolder, menuName + ".yml");
+        if (!menusFolder.exists()) {
+            menusFolder.mkdirs();
+        }
 
-        if (!menuFile.exists()) {
-            plugin.saveResource(resourceName, false);
-            File defaultConfigFile = new File(plugin.getDataFolder(), resourceName);
+        File defaultMenuFile = new File(plugin.getDataFolder(), "menus/default.yml");
+
+        if (!defaultMenuFile.exists()) {
+            plugin.saveResource("menus/default.yml", false);
+            FileConfiguration defaultMenuConfig = new YamlConfiguration();
 
             try {
-                menuConfig.load(defaultConfigFile);
-                menuConfig.save(menuFile);
+                defaultMenuConfig.load(defaultMenuFile);
+                menuConfigs.put("default", defaultMenuConfig);
             } catch (IOException | InvalidConfigurationException e) {
                 e.printStackTrace();
             }
-
-            defaultConfigFile.delete();
         }
     }
+
+    public void reload() {
+        loadConfigurations();
+        loadListenerConfiguration();
+        loadMenuConfigurations();
+    }
 }
+
 
 
 

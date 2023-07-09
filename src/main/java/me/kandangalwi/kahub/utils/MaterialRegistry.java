@@ -15,32 +15,20 @@ public class MaterialRegistry {
 
     public static void registerMaterials() {
         for (Material material : Material.values()) {
-            materialMap.put(material.name(), material);
+            materialMap.put(material.name().toLowerCase(), material);
         }
     }
 
     public static Material getMaterialByName(String name) {
-        return materialMap.get(name);
+        return materialMap.get(name.toLowerCase());
     }
 
-    public static ItemStack getItemStackById(String id) {
-        if (id == null) {
-            return null;
+    public static ItemStack getItemStackByName(String name) {
+        Material material = getMaterialByName(name);
+        if (material != null) {
+            return new ItemStack(material);
         }
-
-        String[] parts = id.split(":");
-        if (parts.length > 1) {
-            String materialName = parts[0];
-            short dataValue = Short.parseShort(parts[1]);
-
-            Material material = getMaterialByName(materialName);
-            if (material != null) {
-                return new ItemStack(material, 1, dataValue);
-            }
-        }
-
         return null;
     }
 }
-
 
